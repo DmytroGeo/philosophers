@@ -6,37 +6,35 @@
 #    By: dgeorgiy <dgeorgiy@student.42london.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/18 17:27:32 by dgeorgiy          #+#    #+#              #
-#    Updated: 2025/03/19 14:26:08 by dgeorgiy         ###   ########.fr        #
+#    Updated: 2025/06/02 15:36:58 by dgeorgiy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME1 = philo
-NAME2 = philo_processes
+NAME = philo
 FLAGS = -pthread
 CC = cc
-SRCS1 = tutorial.c
-SRCS2 = tutorial2.c
-OBJS1 = $(SRCS1:.c=.o)
-OBJS2 = $(SRCS2:.c=.o)
+SRCS = main.c \
+		error_handling_utils.c \
+		ft_atoi.c \
+		error_handling.c \
+		ft_pustr_fd.c
+
+OBJS = $(SRCS:.c=.o)
 
 %.o: %.c
 		$(CC) $(FLAGS) -c $< -o $@
 
-all: $(NAME1) # $(NAME2)
+all: $(NAME)
 
-$(NAME1): $(OBJS1)
-		$(CC) $(FLAGS) -o $(NAME1) $(OBJS1)
-
-$(NAME2): $(OBJS2)
-		$(CC) $(FLAGS) -o $(NAME2) $(OBJS2)
+$(NAME): $(OBJS)
+		$(CC) $(FLAGS) -o $(NAME) $(OBJS)
 
 clean:
-		rm -f $(OBJS1)
-# rm -f $(OBJS2)
+		rm -f $(OBJS)
 
 fclean: clean
-		rm -f $(NAME1)
-# rm -f $(NAME2)
+		rm -f $(NAME)
+
 re: fclean all
 
 val: 
