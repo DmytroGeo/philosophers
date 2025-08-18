@@ -3,41 +3,58 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dgeorgiy <dgeorgiy@student.42london.com    +#+  +:+       +#+         #
+#    By: dgeorgiy <dgeorgiy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/18 17:27:32 by dgeorgiy          #+#    #+#              #
-#    Updated: 2025/06/02 15:36:58 by dgeorgiy         ###   ########.fr        #
+#    Updated: 2025/08/18 19:29:02 by dgeorgiy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
-FLAGS = -pthread
+FLAGS = -Wall -Wextra -Werror -pthread
 CC = cc
-SRCS = main.c \
-		error_handling_utils.c \
-		ft_atoi.c \
-		error_handling.c \
-		ft_pustr_fd.c
 
-OBJS = $(SRCS:.c=.o)
+INCLUDES = -I./inc
 
-%.o: %.c
-		$(CC) $(FLAGS) -c $< -o $@
+OBJ_FOLDER = ./obj
+SRC_FOLDER = ./src
 
-all: $(NAME)
+SRCS = $(SRC_FOLDER)/main.c \
+		$(SRC_FOLDER)/parse_and_init/parse_args.c \
+		$(SRC_FOLDER)/parse_and_init/init_data.c \
+		$(SRC_FOLDER)/parse_and_init/init_mutexes.c \
+		$(SRC_FOLDER)/parse_and_init/init_philos.c \
+		$(SRC_FOLDER)/utils/ft_atol.c \
+		$(SRC_FOLDER)/utils/err_msg.c \
+		$(SRC_FOLDER)/utils/free_all.c \
+		$(SRC_FOLDER)/utils/get_ms_time.c \
+		$(SRC_FOLDER)/utils/get_stop.c \
+		$(SRC_FOLDER)/utils/wait_loop.c \
+		$(SRC_FOLDER)/routine/run_philos.c \
+		$(SRC_FOLDER)/routine/philo_routine.c \
+		$(SRC_FOLDER)/routine/eat.c \
+		$(SRC_FOLDER)/routine/monitor_routine.c
+
+OBJS = $(patsubst $(SRC_FOLDER)/%.c, $(OBJ_FOLDER)/%.o, $(SRCS))
+
+all: $(OBJ_FOLDER) $(NAME)
+
+$(OBJ_FOLDER):
+	@mkdir -p $(OBJ_FOLDER)
+
+$(OBJ_FOLDER)/%.o: $(SRC_FOLDER)/%.c
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME): $(OBJS)
-		$(CC) $(FLAGS) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-		rm -f $(OBJS)
+	rm -rf $(OBJ_FOLDER)
 
 fclean: clean
-		rm -f $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
-
-val: 
-	valgrind ./$(NAME1)
 
 .PHONY: all clean fclean re
