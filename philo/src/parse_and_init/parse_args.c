@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgeorgiy <dgeorgiy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgeorgiy <dgeorgiy@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 12:45:21 by dgeorgiy          #+#    #+#             */
-/*   Updated: 2025/08/18 13:32:42 by dgeorgiy         ###   ########.fr       */
+/*   Updated: 2025/08/18 20:11:06 by dgeorgiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	parse_args(int ac, char **av, t_data *data)
 	int	flag;
 
 	if (ac != 5 && ac != 6)
-		return (EXIT_FAILURE);
+		return (check_data_err(5), EXIT_FAILURE);
 	memset(data, 0, sizeof(*data));
 	data->num_must_eat = -1;
 	data->num_philos = (int)ft_atol(av[1], &flag);

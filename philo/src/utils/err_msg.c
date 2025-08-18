@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err_msg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgeorgiy <dgeorgiy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dgeorgiy <dgeorgiy@student.42london.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 13:27:00 by dgeorgiy          #+#    #+#             */
-/*   Updated: 2025/08/18 13:41:42 by dgeorgiy         ###   ########.fr       */
+/*   Updated: 2025/08/18 20:13:03 by dgeorgiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ void	check_data_err(int flag)
 	{
 		write(2, "Number of times a philosopher ", 31);
 		write(2, "must eat must be greater than 0\n", 33);
+	}
+	else if (flag == 5)
+	{
+		write(2, "Please provide the executable ", 31);
+		write(2, "and 4 or 5 numeric arguments\n", 30);	
 	}
 }
 
